@@ -1,18 +1,20 @@
 class NumArray {
 public:
+    // After solving with the simple method, found a better method:
     NumArray(vector<int>& nums) {
-        this->nums = nums;
+        int sum = 0;
+        for (int i = 0; i < nums.size(); i++){
+            sum += nums[i];
+            cumulative.push_back(sum);
+        }
     }
     
     int sumRange(int left, int right) {
-        int sum = 0;
-        for (int i = left; i <= right; i++){
-            sum += nums[i];
-        }
-        return sum;
+        
+        return  cumulative[right] - (left ? cumulative[left-1] : 0);
     }
 private:
-    vector<int> nums;
+    vector<int> cumulative;
 };
 
 /**
